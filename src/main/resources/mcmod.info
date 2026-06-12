@@ -1,0 +1,13 @@
+[
+  {
+    "modid": "you_died",
+    "name": "You Died",
+    "description": "A Dark Souls inspired death screen. Replaces the vanilla death screen with an animated 'YOU DIED' splash and a death sting.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/you-died",
+    "authors": ["Gory_Moon"],
+    "credits": "Darkosto for the feature request. 1.12.2 backport by hunterhaunter.",
+    "logoFile": "logo.png"
+  }
+]

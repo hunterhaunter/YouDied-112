@@ -1,46 +1,32 @@
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.1-SNAPSHOT" apply false
+    id 'com.gtnewhorizons.retrofuturagradle' version '1.4.1'
 }
 
-architectury {
-    minecraft = rootProject.minecraft_version
-}
+version = project.mod_version
+group = project.mod_group
+archivesBaseName = 'YouDied'
 
-subprojects {
-    apply plugin: "dev.architectury.loom"
-
-    loom {
-        silentMojangMappingsLicense()
-    }
-
-    dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-        // The following line declares the mojmap mappings, you may use other mappings as well
-        mappings loom.officialMojangMappings()
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
     }
 }
 
-allprojects {
-    apply plugin: "java"
-    apply plugin: "architectury-plugin"
+minecraft {
+    mcVersion = '1.12.2'
+    mcpMappingChannel = 'stable'
+    mcpMappingVersion = '39'
+}
 
-    archivesBaseName = rootProject.archives_base_name + "-" + minecraft_version
-    version = rootProject.mod_version
-    group = rootProject.maven_group
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', '1.12.2'
 
-    //adds the build number to the end of the version string if on a build server
-    if (System.getenv().GITHUB_RUN_NUMBER  != null) {
-        version += ".${System.getenv().GITHUB_RUN_NUMBER}"
+    filesMatching('mcmod.info') {
+        expand 'version': project.version, 'mcversion': '1.12.2'
     }
-    println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+}
 
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = "UTF-8"
-        options.release = 17
-    }
-
-    java {
-        withSourcesJar()
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
