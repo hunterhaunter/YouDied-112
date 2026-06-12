@@ -45,7 +45,10 @@ public final class ClientEventHandler {
         event.setGui(new GuiDeathSplash(cause));
         // Guard against a missing ObjectHolder injection so a registry hiccup can't crash every death.
         if (YouDied.DEATH_SOUND != null) {
-            mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(YouDied.DEATH_SOUND, 1.0F));
+            // getRecord(sound, volume, pitch) at full volume. getMasterRecord plays at the quiet
+            // UI volume (0.25); upstream used volume 1.0 so the 8s sting clearly bleeds into the
+            // respawn menu (the splash hands off at 5.3s).
+            mc.getSoundHandler().playSound(PositionedSoundRecord.getRecord(YouDied.DEATH_SOUND, 1.0F, 1.0F));
         }
     }
 }

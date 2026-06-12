@@ -20,7 +20,7 @@ public class YouDied {
 
     public static final String MOD_ID = "you_died";
     public static final String NAME = "You Died";
-    public static final String VERSION = "1.12.2-3.0.0";
+    public static final String VERSION = "1.12.2-1.0";
 
     @GameRegistry.ObjectHolder(MOD_ID + ":death")
     public static SoundEvent DEATH_SOUND;
