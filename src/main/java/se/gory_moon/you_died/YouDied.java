@@ -6,6 +6,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * You Died — a Dark Souls inspired death screen.
@@ -25,7 +26,7 @@ public class YouDied {
     @GameRegistry.ObjectHolder(MOD_ID + ":death")
     public static SoundEvent DEATH_SOUND;
 
-    @Mod.EventBusSubscriber(modid = MOD_ID)
+    @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
     public static class Registration {
         @SubscribeEvent
         public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
